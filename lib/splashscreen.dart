@@ -1,4 +1,4 @@
-import 'package:arbori/homepage.dart';
+import 'package:arbori/langingpage.dart';
 import 'package:arbori/main.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   navigatetoscreen() async {
     await Future.delayed(Duration(milliseconds: 1500));
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Home()));
+        context, MaterialPageRoute(builder: (context) => Landing()));
   }
 
   @override
