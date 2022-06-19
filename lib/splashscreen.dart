@@ -26,15 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: Color.fromRGBO(117, 155, 201, 1),
-      child: Center(
-        child: Text(
-          'ARBORI',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: Container(
+        color: Color.fromRGBO(117, 155, 201, 1),
+        child: Center(
+          child: Image.asset("assets/images/logo.png"),
         ),
         //child: SvgPicture.asset('assets/logo.svg'),
       ),
-    ));
+    );
   }
 }

@@ -8,6 +8,9 @@ class Landing extends StatelessWidget {
     return Scaffold(
       //appBar: AppBar(),
       body: Container(
+        // color: Colors.blue,
+        padding: const EdgeInsets.all(30),
+
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -19,26 +22,64 @@ class Landing extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-                //color: Colors.pink,
-
-                //margin: const EdgeInsets.only(left: 10.0),
-                margin: const EdgeInsets.only(
-                  top: 36.0,
-                  left: 30.0,
-                ),
-                child: Center(
+            Column(
+              children: [
+                Center(
                   child: Image.asset("assets/images/Arbori.png"),
+                ),
+                SizedBox(height: 25),
+                Center(
+                  child: Text(
+                    "Let's plant with us",
+                    style: const TextStyle(
+                        fontSize: 24,
+                        color: Color.fromRGBO(98, 98, 98, 1),
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Center(
+                  child: Image.asset("assets/images/Girl.png"),
+                ),
+              ],
+            ),
+            SizedBox(height: 50),
+            Column(
+              children: [
+                Center(
+                    child: SizedBox(
+                  height: 71,
+                  width: 278,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(35.0),
+                      ),
+                      padding: EdgeInsets.all(20),
+                      // color: Colors.white,
+                    ),
+                    child: Text(
+                      "Get Started...",
+                      style: TextStyle(
+                          color: Color.fromRGBO(72, 67, 67, 1),
+                          fontSize: 26,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
                 )),
-            Container(
-                //color: Colors.blue,
-                //margin: const EdgeInsets.only(top: 10.0, left: 30.0),
-                child: Center(
-              child: Text(
-                "Lets plant with us",
-                style: const TextStyle(fontSize: 24),
-              ),
-            ))
+                SizedBox(height: 30),
+                Center(
+                    child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Already a member?Sign in here",
+                    style: TextStyle(
+                        color: Color.fromRGBO(98, 98, 98, 1), fontSize: 18),
+                  ),
+                ))
+              ],
+            )
           ],
         ),
       ),
