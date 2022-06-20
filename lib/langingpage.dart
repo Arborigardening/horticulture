@@ -1,8 +1,16 @@
+import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 
-class Landing extends StatelessWidget {
+
+
+class Landing extends StatefulWidget {
   const Landing({Key? key}) : super(key: key);
 
+  @override
+  State<Landing> createState() => _LandingState();
+}
+
+class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +58,7 @@ class Landing extends StatelessWidget {
                   height: 71,
                   width: 278,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MyHomePage()));},
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       shape: new RoundedRectangleBorder(
@@ -71,7 +79,8 @@ class Landing extends StatelessWidget {
                 SizedBox(height: 30),
                 Center(
                     child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                   },
                   child: Text(
                     "Already a member?Sign in here",
                     style: TextStyle(
