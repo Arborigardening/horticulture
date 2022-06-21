@@ -1,7 +1,6 @@
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:arbori/login.dart';
 
 class Landing extends StatefulWidget {
   const Landing({Key? key}) : super(key: key);
@@ -58,7 +57,10 @@ class _LandingState extends State<Landing> {
                   height: 71,
                   width: 278,
                   child: ElevatedButton(
-                    onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MyHomePage()));},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MyHomePage()));
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       shape: new RoundedRectangleBorder(
@@ -80,7 +82,9 @@ class _LandingState extends State<Landing> {
                 Center(
                     child: TextButton(
                   onPressed: () {
-                   },
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  },
                   child: Text(
                     "Already a member?Sign in here",
                     style: TextStyle(
