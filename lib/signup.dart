@@ -1,5 +1,5 @@
 import 'dart:html';
-
+import 'package:arbori/plant_details.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -176,7 +176,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.white,
                 ),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PlantDetails()));
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
                     shape: new RoundedRectangleBorder(
