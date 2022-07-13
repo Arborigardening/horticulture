@@ -16,9 +16,23 @@ class _PlantDetailsState extends State<PlantDetails> {
       backgroundColor: Color.fromARGB(255, 178, 203, 224),
       body: Column(
         children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    icon: Image.asset('assets/images/back.png'),
+                    iconSize: 50,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const MyHomePage()));
+                    },
+                  ),
+              ),
           SizedBox(
             width: 300,
-            height: 280,
+            height: 194,
           ),
           Container(
             //margin: const EdgeInsets.only(left: 20.0, right: 20.0),

@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'package:arbori/plant_details.dart';
+import 'package:arbori/login.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          padding: const EdgeInsets.fromLTRB(43.0, 140.0, 43.0, 0),
+          padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0),
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -27,6 +28,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ])),
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    icon: Image.asset('assets/images/back.png'),
+                    iconSize: 50,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const Login()));
+                    },
+                  ),
+              ),
+              SizedBox(
+                height: 75,
+              ),
               Text(
                 "Sign Up",
                 style: TextStyle(

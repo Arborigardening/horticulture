@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:arbori/plant_added.dart';
+import 'package:arbori/plant_details.dart';
 
 class inorout extends StatefulWidget {
   const inorout({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _inoroutState extends State<inorout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -28,6 +29,23 @@ class _inoroutState extends State<inorout> {
         child: Center(
           child: Column(
             children: [
+              SizedBox(
+                  height: 20,
+                ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    icon: Image.asset('assets/images/back.png'),
+                    iconSize: 50,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PlantDetails()));
+                    },
+                  ),
+              ),
+              SizedBox(
+                height: 2,
+              ),
               Center(
                 child: Text(
                   "Indoor or Outdoor",
@@ -47,7 +65,7 @@ class _inoroutState extends State<inorout> {
                   Container(
                     height: 150,
                     width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    margin: EdgeInsets.symmetric(horizontal: 45, vertical: 10),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -93,7 +111,7 @@ class _inoroutState extends State<inorout> {
                   Container(
                     height: 150,
                     width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    margin: EdgeInsets.symmetric(horizontal: 45, vertical: 10),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors.white,
