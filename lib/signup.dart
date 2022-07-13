@@ -31,13 +31,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                    icon: Image.asset('assets/images/back.png'),
-                    iconSize: 50,
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const Login()));
-                    },
-                  ),
+                  icon: Image.asset('assets/images/back.png'),
+                  iconSize: 50,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  },
+                ),
               ),
               SizedBox(
                 height: 75,

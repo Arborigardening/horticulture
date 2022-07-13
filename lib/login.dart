@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:arbori/Home.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
 class Login extends StatefulWidget {
@@ -68,8 +69,8 @@ class _LoginState extends State<Login> {
                     width: 278,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (context) => const MyHomePage()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const home()));
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white,
