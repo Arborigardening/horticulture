@@ -29,9 +29,9 @@ def commonapi():
     return string
 
 
-@app.route('/api/signin')
+@app.route('/api/signin',methods=['POST'])
 def signin():
-    print(request.data)
+    #print(request.data)
     data = request.get_json()
     username = data['username']
     email=data['email']
@@ -40,11 +40,13 @@ def signin():
     var=cursor.execute("select username from login where username='"+ username +"'")
     if(var==0):
         cursor.execute("insert into login values('" + username + "','" + email + "','" + password +"')")
-        return jsonify({"answer": "signed up successfully"})    #no existing username, all ok      
+        mysql.connection.commit()
+        return jsonify({"answer": "signed up successfully"})    #no existing username, all ok     
+        
     else:
         return jsonify({"answer": "password already existing"})    # username already existing
 
-@app.route('/api/login')
+@app.route('/api/login',methods=['POST'])
 def login():
     data = request.get_json()
     global username 
@@ -53,11 +55,12 @@ def login():
     cursor = mysql.connection.cursor()
     var=cursor.execute("select username from login where username='"+username+"' and password='" + password+"'")
     if(var==0):
-        return jsonify({"answer": "credentials not match or account not found"})   
+        #return jsonify({"answer": "credentials not match or account not found"})
+        return('',204)
     else:
         return jsonify({"answer": "account found"})     
 
-@app.route('/api/plantdetails')
+@app.route('/api/plantdetails',methods=['POST'])
 def plantdetails():
     data = request.get_json()
     plantspecified=data['plant']
@@ -76,12 +79,12 @@ def plantdetails():
     
     return jsonify(d)
 
-@app.route('/api/trackmyplants')
+@app.route('/api/trackmyplants',methods=['POST'])
 def trackmyplants():
     cursor = mysql.connection.cursor()
-    cursor.execute("select selection_id,selected_plant,start_date from selections where username='" + username +"'")
+    cursor.execute("select selection_id,selected_plant from selections where username='" + username +"'")
     t=cursor.fetchall()
-    cols=["selection_id","selected_plant","start_date"]
+    cols=["selection_id","selected_plant"]
     d = dict()
     for i in zip(cols, list(t[0])):
         d[i[0]] = i[1]
@@ -89,7 +92,7 @@ def trackmyplants():
 
     return jsonify(d)
 
-@app.route('/api/addplant')
+@app.route('/api/addplant',methods=['POST'])
 def addplant():
     data = request.get_json()
     planttoadd=data['plant']
@@ -105,7 +108,7 @@ def addplant():
     mysql.connection.commit()
     return jsonify({"answer": "plant added"}) 
 
-@app.route('/api/removeplant')
+@app.route('/api/removeplant',methods=['POST'])
 def removeplant():
     data=request.get_json()
     s_id=data['selection_id']
@@ -115,7 +118,7 @@ def removeplant():
     return jsonify({"answer":"plant removed"})
 
 
-@app.route('/api/detailsofselectedplants')
+@app.route('/api/detailsofselectedplants',methods=['POST'])
 def detailsofselectedplants():
     data = request.get_json()
     plantspecified=data['plant']
@@ -139,16 +142,28 @@ def detailsofselectedplants():
     cursor.execute("select url from pic where plant='" + plantspecified +"'")
     t=cursor.fetchall()
     d['pic']=t[0][0]
-    
-    
+      
     return jsonify(d)
 
 
+@app.route('/api/dailyupdate',methods=['POST'])
+def dailyupdate():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select distinct username from selections")
+    t=cursor.fetchall()
+    length=len(t)
+    userlist=[]
+    for i in range(length):
+        userlist.append(t[i][0])
+    print(userlist)
+    return jsonify("retrun from dailyupdate")
+    
+
 
 
 
 
     
-app.run(host='0.0.0.0', port=5000)
+app.run(host='192.168.18.5', port=5000)
 
 
