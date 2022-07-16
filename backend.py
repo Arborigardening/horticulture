@@ -1,5 +1,6 @@
 from flask import Flask,request,jsonify
 from flask_mysqldb import MySQL
+from datetime import datetime
 username = ''
 
 app = Flask(__name__)
@@ -15,7 +16,11 @@ mysql=MySQL(app)
 
 
 @app.route('/')
-def google():
+def commonapi():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    if(current_time=="07:41:19"):
+        print("time to water")
     cursor = mysql.connection.cursor()
     var=cursor.execute("select * from plant where plant='tomato'")
     t=cursor.fetchall()
@@ -64,8 +69,12 @@ def plantdetails():
     d = dict()
     for i in zip(cols, list(t[0])):
         d[i[0]] = i[1]
+
+    cursor.execute("select url from pic where plant='" + plantspecified +"'")
+    t=cursor.fetchall()
+    d['pic']=t[0][0]
     
-    return d
+    return jsonify(d)
 
 @app.route('/api/trackmyplants')
 def trackmyplants():
@@ -105,6 +114,34 @@ def removeplant():
     cursor.connection.commit()
     return jsonify({"answer":"plant removed"})
 
+
+@app.route('/api/detailsofselectedplants')
+def detailsofselectedplants():
+    data = request.get_json()
+    plantspecified=data['plant']
+    sel_id=data['selection_id']
+    cursor = mysql.connection.cursor()
+    cursor.execute("select * from plant where plant='" + plantspecified +"'")
+    t=cursor.fetchall()
+    #print(t)
+    cols=["plant","planting_season","chemicals","fertilizers","rainfall","sunshine","temperature","description","soil_depth","f0","f1","f2","w0","w1","w2","harvesting_time","expected_time"]
+    d = dict()
+    for i in zip(cols, list(t[0])):
+        d[i[0]] = i[1]
+
+    cursor.execute("select start_date from selections where username='" + username +"'and selection_id=" + str(sel_id))
+    t=cursor.fetchall()
+    d['start_date']=t[0][0]
+    cursor.execute("select datediff('"+ str(t[0][0]) +"',curdate())")
+    #print("select datediff('"+ str(t[0][0]) +"',curdate())")
+    t=cursor.fetchall()
+    d['day count']=t[0][0]
+    cursor.execute("select url from pic where plant='" + plantspecified +"'")
+    t=cursor.fetchall()
+    d['pic']=t[0][0]
+    
+    
+    return jsonify(d)
 
 
 
