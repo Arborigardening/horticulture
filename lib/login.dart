@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
+import 'package:arbori/loginapi.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
 class Login extends StatefulWidget {
@@ -10,6 +11,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool userCheck = true;
+  bool passCheck = true;
+  final userController = TextEditingController();
+  final passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +44,41 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(
-                height: 100,
+                height: MediaQuery.of(context).size.height * .12,
               ),
               SizedBox(
                 width: 270,
                 child: TextField(
                   cursorColor: Colors.white,
+
+                  style: TextStyle(
+                    height: 2,
+                    fontSize: 20,
+                  ),
+
+                  decoration: InputDecoration(
+                    labelText: "Username",
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 179, 176, 176),
+                    ),
+                  ),
+                  controller: userController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
+                  keyboardType: TextInputType.multiline,
+                  // obscureText: true,
+                ),
+              ),
+              SizedBox(
+                width: 270,
+                child: TextField(
+                  cursorColor: Colors.white,
+                  controller: passController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
                   style: TextStyle(
                     height: 2,
                     fontSize: 20,
@@ -60,7 +94,9 @@ class _LoginState extends State<Login> {
                   obscureText: true,
                 ),
               ),
-              SizedBox(height: 110),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .12,
+              ),
               Column(
                 children: [
                   Center(
@@ -69,8 +105,8 @@ class _LoginState extends State<Login> {
                     width: 278,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const home()));
+                        _checkLogin(); // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => const home()));
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white,
@@ -89,7 +125,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   )),
-                  SizedBox(height: 35),
+                  // SizedBox(height: 35),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .05,
+                  ),
                   Center(
                       child: TextButton(
                     onPressed: () {},
@@ -106,5 +145,33 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void _checkLogin() {
+    String id = userController.text;
+    String pass = passController.text;
+    setState(() {
+      userCheck = true;
+      passCheck = true;
+    });
+    if (id.isEmpty) {
+      setState(() {
+        userCheck = false;
+      });
+    } else if (pass.isEmpty) {
+      setState(() {
+        passCheck = false;
+      });
+    } else {
+      login(id, pass).then((value) {
+        if (value) {
+          print('Authenticated');
+          // print(refresh_token);
+          // print(access_token);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => home()));
+        }
+      });
+    }
   }
 }
