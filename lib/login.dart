@@ -166,8 +166,7 @@ class _LoginState extends State<Login> {
       login(id, pass).then((value) {
         if (value) {
           print('Authenticated');
-          // print(refresh_token);
-          // print(access_token);
+
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => home()));
         }
