@@ -13,6 +13,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final userController = TextEditingController();
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ]),
                 child: TextField(
                   cursorColor: Colors.white,
+                  controller: userController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
                   style: TextStyle(
                     height: 2,
                     fontSize: 20,
@@ -113,6 +120,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ]),
                 child: TextField(
                   cursorColor: Colors.white,
+                  controller: emailController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
                   style: TextStyle(
                     height: 2,
                     fontSize: 20,
@@ -155,6 +166,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ]),
                 child: TextField(
                   cursorColor: Colors.white,
+                  controller: passController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
                   style: TextStyle(
                     height: 2,
                     fontSize: 20,
