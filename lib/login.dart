@@ -10,6 +10,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final userController = TextEditingController();
+  final passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +41,41 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(
-                height: 100,
+                height: MediaQuery.of(context).size.height * .12,
               ),
               SizedBox(
                 width: 270,
                 child: TextField(
                   cursorColor: Colors.white,
+
+                  style: TextStyle(
+                    height: 2,
+                    fontSize: 20,
+                  ),
+
+                  decoration: InputDecoration(
+                    labelText: "Username",
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 179, 176, 176),
+                    ),
+                  ),
+                  controller: userController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
+                  keyboardType: TextInputType.multiline,
+                  // obscureText: true,
+                ),
+              ),
+              SizedBox(
+                width: 270,
+                child: TextField(
+                  cursorColor: Colors.white,
+                  controller: passController,
+                  onChanged: (String value) {
+                    print(value);
+                  },
                   style: TextStyle(
                     height: 2,
                     fontSize: 20,
@@ -60,7 +91,9 @@ class _LoginState extends State<Login> {
                   obscureText: true,
                 ),
               ),
-              SizedBox(height: 110),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .12,
+              ),
               Column(
                 children: [
                   Center(
@@ -89,7 +122,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   )),
-                  SizedBox(height: 35),
+                  // SizedBox(height: 35),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .05,
+                  ),
                   Center(
                       child: TextButton(
                     onPressed: () {},
