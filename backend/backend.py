@@ -1,6 +1,8 @@
+import requests 
 from flask import Flask,request,jsonify
 from flask_mysqldb import MySQL
 from datetime import datetime
+
 username = ''
 
 app = Flask(__name__)
@@ -156,12 +158,39 @@ def dailyupdate():
     for i in range(length):
         userlist.append(t[i][0])
     print(userlist)
+    for i in userlist:
+        cursor.execute("select selection_id,location,selected_plant from selections where username='" + i +"'")
+        t=cursor.fetchall()
+        for j in t:
+            sel_id=j[0]
+            place=j[1]
+            plantname=j[2]
+            
+            
+
+
+
+
+    place="koratty"
+    api_key="3e924053c3de16ff4528fca5cc52304a" 
+    weather_url=requests.get(f'http://api.openweathermap.org/data/2.5/forecast?q={place}&cnt=5&appid={api_key}')
+    weather_data=weather_url.json()
+    print(weather_data)
+    weather_desc=weather_data['list'][0]['weather'][0]['main']
+    print(weather_desc)
+    weather_desc=weather_data['list'][1]['weather'][0]['main']
+    print(weather_desc)
+    weather_desc=weather_data['list'][2]['weather'][0]['main']
+    print(weather_desc)
+    weather_desc=weather_data['list'][3]['weather'][0]['main']
+    print(weather_desc)
+    weather_desc=weather_data['list'][4]['weather'][0]['main']
+    print(weather_desc)
     return jsonify("retrun from dailyupdate")
+
     
 
-
-
-
+    
 
     
 app.run(host='0.0.0.0', port=5000)
