@@ -152,6 +152,9 @@ def detailsofselectedplants():
 def dailyupdate():
     api_key="3e924053c3de16ff4528fca5cc52304a"
     d=dict()
+    dt = datetime.now()
+    dayofweek = dt.weekday()    #day of the week 0-monday......6-sunday
+
     cursor = mysql.connection.cursor()
     cursor.execute("select distinct username from selections")
     t=cursor.fetchall()
@@ -168,6 +171,16 @@ def dailyupdate():
             sel_id=j[0]
             loc=j[1]
             plantname=j[2]
+            cursor.execute("select f0,f1,f2,w0,w1,w2 from plant where plant='" + plantname +"'")
+            t2=cursor.fetchall()
+            f0=t2[0][0]
+            f1=t2[0][1]
+            f2=t2[0][2]
+            w0=t2[0][3]
+            w1=t2[0][4]
+            w2=t2[0][5]
+
+
             weather_url=requests.get(f'http://api.openweathermap.org/data/2.5/forecast?q={loc}&cnt=5&appid={api_key}')
             weather_data=weather_url.json()
             weather_desc1=weather_data['list'][0]['weather'][0]['main']
@@ -180,28 +193,68 @@ def dailyupdate():
             if(weather_desc1=='Rain' or weather_desc2=='Rain' or weather_desc3=='Rain' or weather_desc4=='Rain' or weather_desc5=='Rain'):
                 instruction=instruction + " "+i+" there might be rain today you dont need to water the plant " + plantname + " with id " + str(sel_id)
             else:
-                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
-            d[i]=instruction
+                cursor.execute("select start_date from selections where username='" + i +"'and selection_id=" + str(sel_id))
+                t3=cursor.fetchall()
+                cursor.execute("select datediff('"+ str(t3[0][0]) +"',curdate())")
+                t4=cursor.fetchall()
+                day_count=abs(t4[0][0])
+                #print(type(day_count))
+
+                if(not(w2.isalpha())):
+                    if(day_count>=int(w2.split(',')[0])):
+                        frequency=w2.split(',')[1]
+                        print(w2.split(',')[0])
+                        if(frequency==0):
+                            instruction=instruction + ""
+                        if(frequency==1 and dayofweek==0):
+                            instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                        if(frequency==2 and (dayofweek==0 or dayofweek==3)):
+                            instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                        if(frequency==3 and (dayofweek==0 or dayofweek==3 or dayofweek==6)):
+                            instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                        if(frequency==4 and (dayofweek==0 or dayofweek==2 or dayofweek==4 or dayofweek==6)):
+                            instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                        if(frequency==5 and (dayofweek==0 or dayofweek==2 or dayofweek==3 or dayofweek==5 or dayofweek==6)):
+                            instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                        
+                    elif(not(w1.isalpha())):
+                        if(day_count>=int(w1.split(',')[0])):
+                            print("hi")
+                            frequency=w1.split(',')[1]
+                            if(frequency==0):
+                                instruction=instruction + ""
+                            if(frequency==1 and dayofweek==0):
+                                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                            if(frequency==2 and (dayofweek==0 or dayofweek==3)):
+                                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                            if(frequency==3 and (dayofweek==0 or dayofweek==3 or dayofweek==6)):
+                                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                            if(frequency==4 and (dayofweek==0 or dayofweek==2 or dayofweek==4 or dayofweek==6)):
+                                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                            if(frequency==5 and (dayofweek==0 or dayofweek==2 or dayofweek==3 or dayofweek==5 or dayofweek==6)):
+                                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                        else:
+
+                            if(w0.isnumeric()):                             
+                                w0=int(w0)
+                                if(w0==1 and dayofweek==0):
+                                    instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                                if(w0==2 and (dayofweek==0 or dayofweek==3)):
+                                    instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                                if(w0==3 and (dayofweek==0 or dayofweek==3 or dayofweek==6)):
+                                    instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                                if(w0==4 and (dayofweek==0 or dayofweek==2 or dayofweek==4 or dayofweek==6)):
+                                    instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                                if(w0==5 and (dayofweek==0 or dayofweek==2 or dayofweek==3 or dayofweek==5 or dayofweek==6)):
+                                    instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                            else:
+                                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+                    
+
+        d[i]=instruction
     return jsonify(d)
 
-#    place="koratty"
-#    api_key="3e924053c3de16ff4528fca5cc52304a" 
-#    weather_url=requests.get(f'http://api.openweathermap.org/data/2.5/forecast?q={place}&cnt=5&appid={api_key}')
-#    weather_data=weather_url.json()
-#    print(weather_data)
-#    weather_desc=weather_data['list'][0]['weather'][0]['main']
-#    print(weather_desc)
-#    weather_desc=weather_data['list'][1]['weather'][0]['main']
-#    print(weather_desc)
-#    weather_desc=weather_data['list'][2]['weather'][0]['main']
-#    print(weather_desc)
-#    weather_desc=weather_data['list'][3]['weather'][0]['main']
-#    print(weather_desc)
-#    weather_desc=weather_data['list'][4]['weather'][0]['main']
-#    print(weather_desc)
 
-
-    
 
     
 
