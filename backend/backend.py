@@ -57,7 +57,7 @@ def login():
     cursor = mysql.connection.cursor()
     var=cursor.execute("select username from login where username='"+username+"' and password='" + password+"'")
     if(var==0):
-        # return jsonify({"answer": "credentials not match or account not found"},204)
+        #return jsonify({"answer": "credentials not match or account not found"},204)
         return('',204)
     else:
         return jsonify({"answer": "account found"})     
@@ -163,7 +163,7 @@ def dailyupdate():
         t=cursor.fetchall()
         for j in t:
             sel_id=j[0]
-            place=j[1]
+            loc=j[1]
             plantname=j[2]
             
             
