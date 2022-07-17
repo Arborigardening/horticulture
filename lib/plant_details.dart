@@ -1,6 +1,7 @@
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/indoor_outdoor.dart';
+import 'package:arbori/plantdetailapi.dart';
 
 class PlantDetails extends StatefulWidget {
   const PlantDetails({Key? key}) : super(key: key);
@@ -10,11 +11,12 @@ class PlantDetails extends StatefulWidget {
 }
 
 class _PlantDetailsState extends State<PlantDetails> {
+  Details detailsService= Details();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 178, 203, 224),
-      body: Column(
+      body: ListView(
         children: [
                 SizedBox(
                   height: 20,
@@ -59,6 +61,27 @@ class _PlantDetailsState extends State<PlantDetails> {
               ],
             ),
           ),
+          FutureBuilder<List>(
+            future: detailsService.getDetails(),
+            builder: (context,snapshot){
+              if(snapshot.hasData){
+                return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context,i){
+                    String plant_name= snapshot.data![i]['plant'].toString();
+                    return Text(
+                      plant_name
+                    );
+                  },
+                );
+              }
+              else{
+                return Text(
+                  "No data found"
+                );
+              }
+            },
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
