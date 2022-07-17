@@ -1,3 +1,4 @@
+import 'package:arbori/plant_details.dart';
 import 'package:flutter/material.dart';
 
 class home extends StatefulWidget {
@@ -7,24 +8,49 @@ class home extends StatefulWidget {
   State<home> createState() => _homeState();
 }
 
+class PhotoItem {
+  final String image;
+  final String name;
+  PhotoItem(this.image, this.name);
+}
+
 class _homeState extends State<home> {
+  final List<PhotoItem> _items = [
+    PhotoItem(
+        "https://www.isaaa.org/kc/cropbiotechupdate/files/images/421202194321AM.jpg",
+        "Brinjal"),
+    PhotoItem(
+        "https://back.3blmedia.com/sites/default/files/styles/ratio_3_2/public/triplepundit/wide/mccain%20foods%20regenerative%20agriculture.jpg?h=bc09f3d1",
+        "Potato"),
+    PhotoItem(
+        "https://www.thespruce.com/thmb/iGx8FNUqlKjnl3OQFHxS0rebj5o=/941x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/top-tomato-growing-tips-1402587-11-c6d6161716fd448fbca41715bbffb1d9.jpg",
+        "Tomato"),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Center(
+            child: Text('Home',
+                style: TextStyle(
+                  fontSize: 37,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(98, 98, 98, 1),
+                ))),
         backgroundColor: Color.fromRGBO(251, 253, 255, 1),
         shadowColor: Colors.white,
         actions: [
-          Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.menu,
-                  color: Color.fromARGB(255, 33, 243, 194),
-                  size: 30,
-                ),
-              )),
+          // Align(
+          //   alignment: Alignment.topLeft,
+          //   child: GestureDetector(
+          //     onTap: () {},
+          //     child: Icon(
+          //       Icons.menu,
+          //       color: Color.fromARGB(255, 33, 243, 194),
+          //       size: 30,
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
@@ -57,20 +83,61 @@ class _homeState extends State<home> {
                 Color.fromARGB(255, 214, 235, 255)
               ]),
         ),
-        child: Center(
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  "Home",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 37,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(98, 98, 98, 1),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 5,
+            crossAxisCount: 3,
+          ),
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PlantDetails(),
+                  ),
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(_items[index].image),
                   ),
                 ),
               ),
+            ); // Item rendering
+            // return Container(
+            //   padding: const EdgeInsets.all(30),
+            //   decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //         begin: Alignment.topCenter,
+            //         end: Alignment.bottomCenter,
+            //         colors: [
+            //           Color.fromRGBO(251, 253, 255, 1),
+            //           Color.fromARGB(255, 214, 235, 255)
+            //         ]),
+            //   ),
+            // );
+          },
+        ),
+
+        // child: Center(
+        //   child: Column(
+        //     children: [
+        //       Center(
+        //         child: Text(
+        //           "Home",
+        //           textAlign: TextAlign.center,
+        //           style: TextStyle(
+        //             fontSize: 37,
+        //             fontWeight: FontWeight.bold,
+        //             color: Color.fromRGBO(98, 98, 98, 1),
+        //           ),
+        //         ),
+        //       ),
 //               Material(
 //                 elevation: 10.0,
 //                 shadowColor: Color.fromARGB(255, 157, 157, 157),
@@ -98,10 +165,10 @@ class _homeState extends State<home> {
 //                           borderSide:
 //                               BorderSide(color: Colors.white, width: 3.0))),
 //                 ),
-              // ),
-            ],
-          ),
-        ),
+        //       // ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
@@ -111,7 +178,7 @@ class CustomSearch extends SearchDelegate {
   List<String> searchTerms = [
     "Tomato",
     "Potato",
-    "Ginger",
+    "Brinjal",
     "Onion",
   ];
   @override
