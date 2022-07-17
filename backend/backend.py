@@ -150,6 +150,8 @@ def detailsofselectedplants():
 
 @app.route('/api/dailyupdate',methods=['POST'])
 def dailyupdate():
+    api_key="3e924053c3de16ff4528fca5cc52304a"
+    d=dict()
     cursor = mysql.connection.cursor()
     cursor.execute("select distinct username from selections")
     t=cursor.fetchall()
@@ -159,40 +161,51 @@ def dailyupdate():
         userlist.append(t[i][0])
     print(userlist)
     for i in userlist:
+        instruction=""
         cursor.execute("select selection_id,location,selected_plant from selections where username='" + i +"'")
         t=cursor.fetchall()
         for j in t:
             sel_id=j[0]
             loc=j[1]
             plantname=j[2]
+            weather_url=requests.get(f'http://api.openweathermap.org/data/2.5/forecast?q={loc}&cnt=5&appid={api_key}')
+            weather_data=weather_url.json()
+            weather_desc1=weather_data['list'][0]['weather'][0]['main']
+            weather_desc2=weather_data['list'][1]['weather'][0]['main']
+            weather_desc3=weather_data['list'][2]['weather'][0]['main']
+            weather_desc4=weather_data['list'][3]['weather'][0]['main']
+            weather_desc5=weather_data['list'][4]['weather'][0]['main']
+
             
-            
+            if(weather_desc1=='Rain' or weather_desc2=='Rain' or weather_desc3=='Rain' or weather_desc4=='Rain' or weather_desc5=='Rain'):
+                instruction=instruction + " "+i+" there might be rain today you dont need to water the plant " + plantname + " with id " + str(sel_id)
+            else:
+                instruction=instruction + " "+ i +" water the plant " + plantname + " with id " + str(sel_id)
+            d[i]=instruction
+    return jsonify(d)
 
+#    place="koratty"
+#    api_key="3e924053c3de16ff4528fca5cc52304a" 
+#    weather_url=requests.get(f'http://api.openweathermap.org/data/2.5/forecast?q={place}&cnt=5&appid={api_key}')
+#    weather_data=weather_url.json()
+#    print(weather_data)
+#    weather_desc=weather_data['list'][0]['weather'][0]['main']
+#    print(weather_desc)
+#    weather_desc=weather_data['list'][1]['weather'][0]['main']
+#    print(weather_desc)
+#    weather_desc=weather_data['list'][2]['weather'][0]['main']
+#    print(weather_desc)
+#    weather_desc=weather_data['list'][3]['weather'][0]['main']
+#    print(weather_desc)
+#    weather_desc=weather_data['list'][4]['weather'][0]['main']
+#    print(weather_desc)
 
-
-
-    place="koratty"
-    api_key="3e924053c3de16ff4528fca5cc52304a" 
-    weather_url=requests.get(f'http://api.openweathermap.org/data/2.5/forecast?q={place}&cnt=5&appid={api_key}')
-    weather_data=weather_url.json()
-    print(weather_data)
-    weather_desc=weather_data['list'][0]['weather'][0]['main']
-    print(weather_desc)
-    weather_desc=weather_data['list'][1]['weather'][0]['main']
-    print(weather_desc)
-    weather_desc=weather_data['list'][2]['weather'][0]['main']
-    print(weather_desc)
-    weather_desc=weather_data['list'][3]['weather'][0]['main']
-    print(weather_desc)
-    weather_desc=weather_data['list'][4]['weather'][0]['main']
-    print(weather_desc)
-    return jsonify("retrun from dailyupdate")
 
     
 
     
 
     
-app.run(host='192.168.18.5', port=5000)
+app.run(host='0.0.0.0', port=5000)
 
 
