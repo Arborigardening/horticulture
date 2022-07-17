@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
+import 'package:arbori/loginapi.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
 class Login extends StatefulWidget {
@@ -10,6 +11,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool userCheck = true;
+  bool passCheck = true;
   final userController = TextEditingController();
   final passController = TextEditingController();
   @override
@@ -102,8 +105,8 @@ class _LoginState extends State<Login> {
                     width: 278,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const home()));
+                        _checkLogin(); // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => const home()));
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white,
@@ -142,5 +145,32 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void _checkLogin() {
+    String id = userController.text;
+    String pass = passController.text;
+    setState(() {
+      userCheck = true;
+      passCheck = true;
+    });
+    if (id.isEmpty) {
+      setState(() {
+        userCheck = false;
+      });
+    } else if (pass.isEmpty) {
+      setState(() {
+        passCheck = false;
+      });
+    } else {
+      login(id, pass).then((value) {
+        if (value) {
+          print('Authenticated');
+
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => home()));
+        }
+      });
+    }
   }
 }
