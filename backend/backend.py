@@ -46,9 +46,7 @@ def signin():
                        "','" + email + "','" + password + "')")
         mysql.connection.commit()
         # no existing username, all ok
-        return jsonify({"answer": "signed up successfully"}, 200)
-    else:
-        return ('', 204)    # username already existing
+        return jsonify({"answer": "signed up successfully"})
     else:
         # username already existing
         return jsonify({"answer": "password already existing"})
@@ -301,6 +299,7 @@ def dailyupdate():
                     fertilizer+", to the " + plantname + \
                     " with id " + str(sel_id)
             elif(day_count == int(f1.split(',')[0])):
+
                 fertilizer = f1.split(',')[1]
                 print(f1.split(',')[0])
                 instruction = instruction + " " + i + " give the fertilizer :" + \
