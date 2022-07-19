@@ -1,3 +1,4 @@
+import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
 import 'package:arbori/loginapi.dart';
@@ -62,6 +63,7 @@ class _LoginState extends State<Login> {
                       fontSize: 20,
                       color: Color.fromARGB(255, 179, 176, 176),
                     ),
+                    errorText: passCheck ? null : 'Username cannot be empty',
                   ),
                   controller: userController,
                   onChanged: (String value) {
@@ -89,6 +91,7 @@ class _LoginState extends State<Login> {
                       fontSize: 20,
                       color: Color.fromARGB(255, 179, 176, 176),
                     ),
+                    errorText: passCheck ? null : 'Password cannot be empty',
                   ),
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
@@ -131,7 +134,12 @@ class _LoginState extends State<Login> {
                   ),
                   Center(
                       child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage()));
+                    },
                     child: Text(
                       "Don’t have an account?Sign Up",
                       style: TextStyle(
@@ -169,6 +177,18 @@ class _LoginState extends State<Login> {
 
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => home()));
+        }
+        else{
+          SizedBox(
+              child: Text(
+                "Dont have an account?",
+                style: TextStyle(
+                  fontFamily: "poppins",
+                  color: Color.fromARGB(255, 53, 66, 94),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              );
         }
       });
     }

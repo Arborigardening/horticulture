@@ -1,7 +1,9 @@
 import 'dart:html';
+import 'package:arbori/Home.dart';
 import 'package:arbori/plant_details.dart';
 import 'package:arbori/login.dart';
 import 'package:flutter/material.dart';
+import 'package:arbori/signupapi.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -13,6 +15,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // late Future<Account> _futureAlbum;
+  bool val = true;
+
   final userController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
@@ -207,8 +212,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const PlantDetails()));
+                    // created(
+                    //   userController.text,
+                    //   emailController.text,
+                    //   passController.text,
+                    // );
+                    createAccount(
+                      userController.text,
+                      emailController.text,
+                      passController.text,
+                    ).then((value) => {
+                          if (value)
+                            {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const home()))
+                            }
+                          else
+                            {print("Error")}
+                        });
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,

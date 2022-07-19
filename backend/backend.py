@@ -46,8 +46,9 @@ def signin():
                        "','" + email + "','" + password + "')")
         mysql.connection.commit()
         # no existing username, all ok
-        return jsonify({"answer": "signed up successfully"})
-
+        return jsonify({"answer": "signed up successfully"}, 200)
+    else:
+        return ('', 204)    # username already existing
     else:
         # username already existing
         return jsonify({"answer": "password already existing"})

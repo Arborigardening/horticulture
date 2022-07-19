@@ -4,6 +4,8 @@ import 'package:arbori/indoor_outdoor.dart';
 import 'package:arbori/plantdetailapi.dart';
 
 class PlantDetails extends StatefulWidget {
+  // final String text;
+
   const PlantDetails({Key? key}) : super(key: key);
 
   @override
@@ -11,27 +13,27 @@ class PlantDetails extends StatefulWidget {
 }
 
 class _PlantDetailsState extends State<PlantDetails> {
-  Details detailsService= Details();
+  Details detailsService = Details();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 178, 203, 224),
       body: ListView(
         children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                    icon: Image.asset('assets/images/back.png'),
-                    iconSize: 50,
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const MyHomePage()));
-                    },
-                  ),
-              ),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              icon: Image.asset('assets/images/back.png'),
+              iconSize: 50,
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MyHomePage()));
+              },
+            ),
+          ),
           SizedBox(
             width: 300,
             height: 194,
@@ -51,7 +53,7 @@ class _PlantDetailsState extends State<PlantDetails> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 15, 200, 0),
                   child: const Text(
-                    "Aloe Vera",
+                    "Tomato",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 30,
@@ -63,22 +65,17 @@ class _PlantDetailsState extends State<PlantDetails> {
           ),
           FutureBuilder<List>(
             future: detailsService.getDetails(),
-            builder: (context,snapshot){
-              if(snapshot.hasData){
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
                 return ListView.builder(
                   itemCount: snapshot.data?.length,
-                  itemBuilder: (context,i){
-                    String plant_name= snapshot.data![i]['plant'].toString();
-                    return Text(
-                      plant_name
-                    );
+                  itemBuilder: (context, i) {
+                    String plant_name = snapshot.data![i]['plant'].toString();
+                    return Text(plant_name);
                   },
                 );
-              }
-              else{
-                return Text(
-                  "No data found"
-                );
+              } else {
+                return Text("No data found");
               }
             },
           )
