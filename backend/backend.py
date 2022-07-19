@@ -41,10 +41,10 @@ def signin():
     if(var==0):
         cursor.execute("insert into login values('" + username + "','" + email + "','" + password +"')")
         mysql.connection.commit()
-        return jsonify({"answer": "signed up successfully"})    #no existing username, all ok     
+        return jsonify({"answer": "signed up successfully"},200)    #no existing username, all ok     
         
     else:
-        return jsonify({"answer": "password already existing"})    # username already existing
+        return ('',204)    # username already existing
 
 @app.route('/api/login',methods=['POST'])
 def login():

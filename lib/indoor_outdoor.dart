@@ -1,3 +1,4 @@
+import 'package:arbori/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,18 +31,18 @@ class _inoroutState extends State<inorout> {
           child: Column(
             children: [
               SizedBox(
-                  height: 20,
-                ),
+                height: 20,
+              ),
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                    icon: Image.asset('assets/images/back.png'),
-                    iconSize: 50,
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const PlantDetails()));
-                    },
-                  ),
+                  icon: Image.asset('assets/images/back.png'),
+                  iconSize: 50,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const home()));
+                  },
+                ),
               ),
               SizedBox(
                 height: 2,

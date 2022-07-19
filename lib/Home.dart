@@ -1,5 +1,6 @@
 import 'package:arbori/plant_details.dart';
 import 'package:flutter/material.dart';
+import 'package:arbori/plantdetailapi.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -11,10 +12,12 @@ class home extends StatefulWidget {
 class PhotoItem {
   final String image;
   final String name;
+
   PhotoItem(this.image, this.name);
 }
 
 class _homeState extends State<home> {
+  Details detailsService = Details();
   final List<PhotoItem> _items = [
     PhotoItem(
         "https://www.isaaa.org/kc/cropbiotechupdate/files/images/421202194321AM.jpg",
@@ -91,12 +94,17 @@ class _homeState extends State<home> {
           ),
           itemCount: 3,
           itemBuilder: (context, index) {
+            // ignore: unnecessary_new
             return new GestureDetector(
               onTap: () {
+                // data(_items[index].name);
+                String name = _items[index].name;
+                print(_items[index].image);
+                print(_items[index].name);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PlantDetails(),
+                    builder: (context) => const PlantDetails(),
                   ),
                 );
               },
@@ -138,33 +146,33 @@ class _homeState extends State<home> {
         //           ),
         //         ),
         //       ),
-//               Material(
-//                 elevation: 10.0,
-//                 shadowColor: Color.fromARGB(255, 157, 157, 157),
-//                 color: Colors.white,
-//                 child: TextField(
-//                   decoration: InputDecoration(
-//                       prefixIcon: IconButton(
-//                         onPressed: () {
-//                           showSearch(
-//                               context: context, delegate: CustomSearch());
-//                         },
-//                         icon: Icon(Icons.search),
-//                         color: Color.fromARGB(255, 188, 186, 186),
-//                       ),
-//                       hintText: 'search',
-//                       hintStyle: TextStyle(
-//                           fontSize: 18,
-//                           color: Color.fromARGB(255, 188, 186, 186)),
-//                       fillColor: Colors.white,
-//                       filled: true,
-//                       contentPadding:
-//                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-//                       enabledBorder: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(7.0),
-//                           borderSide:
-//                               BorderSide(color: Colors.white, width: 3.0))),
-//                 ),
+        //               Material(
+        //                 elevation: 10.0,
+        //                 shadowColor: Color.fromARGB(255, 157, 157, 157),
+        //                 color: Colors.white,
+        //                 child: TextField(
+        //                   decoration: InputDecoration(
+        //                       prefixIcon: IconButton(
+        //                         onPressed: () {
+        //                           showSearch(
+        //                               context: context, delegate: CustomSearch());
+        //                         },
+        //                         icon: Icon(Icons.search),
+        //                         color: Color.fromARGB(255, 188, 186, 186),
+        //                       ),
+        //                       hintText: 'search',
+        //                       hintStyle: TextStyle(
+        //                           fontSize: 18,
+        //                           color: Color.fromARGB(255, 188, 186, 186)),
+        //                       fillColor: Colors.white,
+        //                       filled: true,
+        //                       contentPadding:
+        //                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        //                       enabledBorder: OutlineInputBorder(
+        //                           borderRadius: BorderRadius.circular(7.0),
+        //                           borderSide:
+        //                               BorderSide(color: Colors.white, width: 3.0))),
+        //                 ),
         //       // ),
         //     ],
         //   ),

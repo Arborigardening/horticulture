@@ -1,3 +1,4 @@
+import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
 import 'package:arbori/loginapi.dart';
@@ -131,7 +132,12 @@ class _LoginState extends State<Login> {
                   ),
                   Center(
                       child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage()));
+                    },
                     child: Text(
                       "Don’t have an account?Sign Up",
                       style: TextStyle(

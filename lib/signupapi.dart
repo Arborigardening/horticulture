@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
 
 bool flag = true;
-Future<bool> data(
+Future<bool> createAccount(
   String id,
   String email,
   String password,
