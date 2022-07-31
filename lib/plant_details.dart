@@ -4,10 +4,12 @@ import 'package:arbori/indoor_outdoor.dart';
 import 'package:arbori/plantdetailapi.dart';
 
 class PlantDetails extends StatefulWidget {
-  // final String text;
+  final String recordName;
+  const PlantDetails(this.recordName, {required String text});
 
-  const PlantDetails({Key? key}) : super(key: key);
+  // const PlantDetails({Key? key, required this.text}) : super(key: key)
 
+  // @override
   @override
   State<PlantDetails> createState() => _PlantDetailsState();
 }
@@ -52,8 +54,8 @@ class _PlantDetailsState extends State<PlantDetails> {
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 15, 200, 0),
-                  child: const Text(
-                    "Tomato",
+                  child: Text(
+                    widget.recordName,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 30,
@@ -64,7 +66,8 @@ class _PlantDetailsState extends State<PlantDetails> {
             ),
           ),
           FutureBuilder<List>(
-            future: detailsService.getDetails(),
+            future: createPlant(
+                widget.recordName), // future: detailsService.getDetails(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(

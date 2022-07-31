@@ -104,7 +104,10 @@ class _homeState extends State<home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const PlantDetails(),
+                    builder: (context) => PlantDetails(
+                      name,
+                      text: _items[index].name,
+                    ),
                   ),
                 );
               },

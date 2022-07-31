@@ -11,9 +11,13 @@ Future<bool> login(String id, String pass) async {
 
   try {
     final response = await http.post(
-      Uri.parse('http://192.168.18.5:5000/api/login'),
+      Uri.parse('http://192.168.1.2:5000/api/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        /*"Access-Control-Allow-Origin": "*", // Required for CORS support to work
+        //"Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
+        "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",*/
       },
       body: jsonEncode(<String, String>{'username': id, 'password': pass}),
     );
@@ -25,6 +29,7 @@ Future<bool> login(String id, String pass) async {
       return false;
     }
   } catch (e) {
+    print(e);
     return false;
   }
 }

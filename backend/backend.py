@@ -1,4 +1,4 @@
-import requests 
+#import requests 
 from flask import Flask,request,jsonify
 from flask_mysqldb import MySQL
 from datetime import datetime
@@ -259,6 +259,4 @@ def dailyupdate():
     
 #print("hi")
     
-app.run(host='0.0.0.0', port=5000)
-
-
+app.run(host='192.168.1.2', port=5000)

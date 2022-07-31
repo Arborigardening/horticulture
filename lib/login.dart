@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                       fontSize: 20,
                       color: Color.fromARGB(255, 179, 176, 176),
                     ),
-                    errorText: passCheck ? null : 'Username cannot be empty',
+                    errorText: userCheck ? null : 'Username cannot be empty',
                   ),
                   controller: userController,
                   onChanged: (String value) {
@@ -179,18 +179,47 @@ class _LoginState extends State<Login> {
               context, MaterialPageRoute(builder: (context) => home()));
         }
         else{
-          SizedBox(
-              child: Text(
+          print("dont have account");
+        /*SizedBox(
+          child: Text(
                 "Dont have an account?",
                 style: TextStyle(
                   fontFamily: "poppins",
                   color: Color.fromARGB(255, 53, 66, 94),
                   fontWeight: FontWeight.w600,
                 ),
-              ),
-              );
+              ));*/
+              //AlertDialog(title: Text("Sample Alert Dialog"));
+              showAlertDialog(context); 
         }
       });
     }
   }
 }
+
+showAlertDialog(BuildContext context) {  
+  // Create button  
+  Widget okButton = FlatButton(  
+    child: Text("OK"),  
+    onPressed: () {  
+      Navigator.of(context).pop();  
+    },  
+  );  
+  
+  // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: Text("Alert"),  
+    content: Text("Don't have an account."),  
+    actions: [  
+      okButton,  
+    ],  
+  );  
+  
+  // show the dialog  
+  showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );  
+}  
