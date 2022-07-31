@@ -1,22 +1,23 @@
 import 'dart:html';
+import 'dart:ui';
 import 'package:arbori/Home.dart';
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/indoor_outdoor.dart';
 import 'package:arbori/plantdetailapi.dart';
 
-class PlantDetails extends StatefulWidget {
+class Tomato extends StatefulWidget {
   final String recordName;
-  const PlantDetails(this.recordName, {required String text});
+  const Tomato(this.recordName, {required String text});
 
   // const PlantDetails({Key? key, required this.text}) : super(key: key)
 
   // @override
   @override
-  State<PlantDetails> createState() => _PlantDetailsState();
+  State<Tomato> createState() => _TomatoState();
 }
 
-class _PlantDetailsState extends State<PlantDetails> {
+class _TomatoState extends State<Tomato> {
   // Details detailsService = Details();
   plantdetail p = plantdetail();
   // selectedPlant s = selectedPlant();
@@ -46,13 +47,15 @@ class _PlantDetailsState extends State<PlantDetails> {
                 },
               ),
             ),
+            Container(
+            child:Image.asset('assets/images/tomato.jpg'),),
             SizedBox(
               width: 300,
               height: 194,
             ),
             Container(
               //margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-              height: 571,
+              height: 885,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -69,12 +72,99 @@ class _PlantDetailsState extends State<PlantDetails> {
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 30,
+                        color: Colors.red,
                       ),
                     ),
                   ),
-
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Planting Season: June- July",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Chemicals: nitrogen,phosphorous,potassium,calcium",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Fertilizer: NPK:5-10-5",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Rainfall: low-medium",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Sunshine: bright",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Temperature: 32cel-33cel",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Description: Seeds are sown at a depth of 2-3 cm and covered with a fine layer of soil followed by light watering by water can. The beds should then be covered with dry straw or grass or sugarcane leaves to maintain required temperature and moisture. The watering should be done by water can as per the need till germination is completed. The cover of dry straw or grass is removed immediately after germination is complete",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Harvesting time: 120-130",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                   // Text(p.createPlant(widget.recordName)),
-                  FutureBuilder<dynamic>(
+                  /*FutureBuilder<dynamic>(
                     future: p.createPlant(widget
                         .recordName), // future: detailsService.getDetails(),
                     builder: (context, snapshot) {
@@ -131,7 +221,7 @@ class _PlantDetailsState extends State<PlantDetails> {
                       }
                       return const Center(child: CircularProgressIndicator());
                     },
-                  )
+                  )*/
                 ],
               ),
             ),

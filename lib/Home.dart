@@ -1,4 +1,5 @@
 import 'package:arbori/plant_details.dart';
+import 'package:arbori/tomato.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +111,7 @@ class _homeState extends State<home> {
         title: Center(
             child: Text('Home',
                 style: TextStyle(
+                  fontFamily: "poppins",
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                   color: Color.fromRGBO(98, 98, 98, 1),
@@ -179,7 +181,7 @@ class _homeState extends State<home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PlantDetails(
+                    builder: (context) => Tomato(
                       name,
                       text: _items[index].name,
                     ),
