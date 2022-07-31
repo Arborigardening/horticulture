@@ -48,11 +48,11 @@ class _TomatoState extends State<Tomato> {
               ),
             ),
             Container(
-            child:Image.asset('assets/images/tomato.jpg'),),
-            SizedBox(
+            child:Image.asset('assets/images/tomato 1.png'),),
+            /*SizedBox(
               width: 300,
               height: 194,
-            ),
+            ),*/
             Container(
               //margin: const EdgeInsets.only(left: 20.0, right: 20.0),
               height: 885,

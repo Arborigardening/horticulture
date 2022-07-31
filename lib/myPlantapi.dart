@@ -12,7 +12,7 @@ class myplant {
     print(id);
     try {
       final http.Response response = await http.post(
-        Uri.parse('http://192.168.18.5:5000/api/trackmyplants'),
+        Uri.parse('http://192.168.1.2:5000/api/trackmyplants'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

@@ -15,7 +15,7 @@ class plantdetail {
       // var newURI =
       // Uri.http(''192.168.18.5:5000','/api/plantdetails', {'plant':'id'});
       final http.Response response = await http.post(
-        Uri.parse('http://192.168.18.5:5000/api/plantdetails'),
+        Uri.parse('http://192.168.1.2:5000/api/plantdetails'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
