@@ -177,16 +177,9 @@ class _LoginState extends State<Login> {
 
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => home()));
-<<<<<<< HEAD
         } else {
           print("dont have account");
           /*SizedBox(
-=======
-        }
-        else{
-          print("dont have account");
-        /*SizedBox(
->>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2
           child: Text(
                 "Dont have an account?",
                 style: TextStyle(
@@ -195,20 +188,14 @@ class _LoginState extends State<Login> {
                   fontWeight: FontWeight.w600,
                 ),
               ));*/
-<<<<<<< HEAD
           //AlertDialog(title: Text("Sample Alert Dialog"));
           showAlertDialog(context);
-=======
-              //AlertDialog(title: Text("Sample Alert Dialog"));
-              showAlertDialog(context); 
->>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2
         }
       });
     }
   }
 }
 
-<<<<<<< HEAD
 showAlertDialog(BuildContext context) {
   // Create button
   Widget okButton = FlatButton(
@@ -235,31 +222,3 @@ showAlertDialog(BuildContext context) {
     },
   );
 }
-=======
-showAlertDialog(BuildContext context) {  
-  // Create button  
-  Widget okButton = FlatButton(  
-    child: Text("OK"),  
-    onPressed: () {  
-      Navigator.of(context).pop();  
-    },  
-  );  
-  
-  // Create AlertDialog  
-  AlertDialog alert = AlertDialog(  
-    title: Text("Alert"),  
-    content: Text("Don't have an account."),  
-    actions: [  
-      okButton,  
-    ],  
-  );  
-  
-  // show the dialog  
-  showDialog(  
-    context: context,  
-    builder: (BuildContext context) {  
-      return alert;  
-    },  
-  );  
-}  
->>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2

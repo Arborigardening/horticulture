@@ -19,7 +19,7 @@ class PhotoItem {
 class _homeState extends State<home> {
   // Details detailsService = Details();
 
-  selectedPlant s = selectedPlant();
+  // selectedPlant s = selectedPlant();
   final List<PhotoItem> _items = [
     PhotoItem(
         "https://www.isaaa.org/kc/cropbiotechupdate/files/images/421202194321AM.jpg",
@@ -101,7 +101,7 @@ class _homeState extends State<home> {
               onTap: () {
                 // data(_items[index].name);
                 String name = _items[index].name;
-                s.selected(name);
+                // s.selected(name);
                 // print(_items[index].image);
                 print(_items[index].name);
                 Navigator.push(
@@ -255,29 +255,4 @@ class CustomSearch extends SearchDelegate {
       },
     );
   }
-<<<<<<< HEAD
 }
-
-class selectedPlant {
-  late String name;
-  late final String id;
-  // selectedPlant(String nm) {
-  //   name = nm;
-  // }
-
-  void selected(name) {
-    id = name;
-    print("selected plant class");
-    print(name);
-    // return name;
-  }
-
-  // String plant({name = id}) {
-  //   print(" plant class");
-  //   print(name);
-  //   return name;
-  // }
-}
-=======
-}
->>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2
