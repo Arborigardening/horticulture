@@ -46,11 +46,10 @@ def signin():
                        "','" + email + "','" + password + "')")
         mysql.connection.commit()
         # no existing username, all ok
-        return jsonify({"answer": "signed up successfully"})
+        return jsonify({"answer": "signed up successfully"},200)
     else:
         # username already existing
-        return jsonify({"answer": "password already existing"})
-
+        return ('',204)
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -316,4 +315,4 @@ def dailyupdate():
 
 
 # print("hi")
-app.run(host='192.168.18.5', port=5000)
+app.run(host='192.168.1.2', port=5000)

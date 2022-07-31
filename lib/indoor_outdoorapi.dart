@@ -12,7 +12,7 @@ Future<bool> addPlantselected(
 
   try {
     final http.Response response = await http.post(
-      Uri.parse('http://192.168.18.5:5000/api/addplant'),
+      Uri.parse('http://192.168.1.2:5000/api/addplant'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
