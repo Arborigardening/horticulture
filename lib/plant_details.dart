@@ -46,6 +46,7 @@ class _PlantDetailsState extends State<PlantDetails> {
                 },
               ),
             ),
+<<<<<<< HEAD
             SizedBox(
               width: 300,
               height: 194,
@@ -70,6 +71,17 @@ class _PlantDetailsState extends State<PlantDetails> {
                         fontWeight: FontWeight.w600,
                         fontSize: 30,
                       ),
+=======
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 15, 200, 0),
+                  child: Text(
+                    widget.recordName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 30,
+>>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2
                     ),
                   ),
 
@@ -135,7 +147,38 @@ class _PlantDetailsState extends State<PlantDetails> {
                 ],
               ),
             ),
+<<<<<<< HEAD
           ],
+=======
+          ),
+          FutureBuilder<List>(
+            future: createPlant(
+                widget.recordName), // future: detailsService.getDetails(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, i) {
+                    String plant_name = snapshot.data![i]['plant'].toString();
+                    return Text(plant_name);
+                  },
+                );
+              } else {
+                return Text("No data found");
+              }
+            },
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (() => {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const inorout()))
+            }),
+        label: const Text(
+          'Add',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+>>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2
         ),
 
         //     FutureBuilder<List>(
@@ -188,6 +231,7 @@ class _PlantDetailsState extends State<PlantDetails> {
           backgroundColor: Color.fromRGBO(75, 227, 168, 1),
         ));
   }
+<<<<<<< HEAD
 }
 
 // class selectedPlant {
@@ -201,3 +245,6 @@ class _PlantDetailsState extends State<PlantDetails> {
 //     return plantName;
 //   }
 // }
+=======
+}
+>>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2

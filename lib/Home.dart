@@ -255,6 +255,7 @@ class CustomSearch extends SearchDelegate {
       },
     );
   }
+<<<<<<< HEAD
 }
 
 class selectedPlant {
@@ -277,3 +278,6 @@ class selectedPlant {
   //   return name;
   // }
 }
+=======
+}
+>>>>>>> 7f1b5c00a0b20dd8c0c143a3994bae1ddfb19ad2
