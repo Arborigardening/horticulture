@@ -2,6 +2,7 @@ import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
 import 'package:arbori/loginapi.dart';
+import 'package:arbori/myPlantapi.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
 class Login extends StatefulWidget {
@@ -12,6 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  myplant p = myplant();
   bool userCheck = true;
   bool passCheck = true;
   final userController = TextEditingController();
@@ -174,21 +176,12 @@ class _LoginState extends State<Login> {
       login(id, pass).then((value) {
         if (value) {
           print('Authenticated');
-
+          p.trackPlant(id);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => home()));
         } else {
           print("dont have account");
-          /*SizedBox(
-          child: Text(
-                "Dont have an account?",
-                style: TextStyle(
-                  fontFamily: "poppins",
-                  color: Color.fromARGB(255, 53, 66, 94),
-                  fontWeight: FontWeight.w600,
-                ),
-              ));*/
-          //AlertDialog(title: Text("Sample Alert Dialog"));
+
           showAlertDialog(context);
         }
       });

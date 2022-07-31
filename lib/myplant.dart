@@ -177,6 +177,19 @@ class myPlant extends StatefulWidget {
 }
 
 class _myPlantState extends State<myPlant> {
+  bool viewVisible = true;
+  void showWidget() {
+    setState(() {
+      viewVisible = true;
+    });
+  }
+
+  void hideWidget() {
+    setState(() {
+      viewVisible = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
