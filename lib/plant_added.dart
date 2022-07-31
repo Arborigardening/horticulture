@@ -1,8 +1,14 @@
+import 'package:arbori/myplant.dart';
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 class PlantAdded extends StatefulWidget {
-  const PlantAdded({Key? key}) : super(key: key);
+  final String recordName;
+  const PlantAdded(this.recordName, {required String text});
+  // const PlantAdded(String recordName, {Key? key}) : super(key: key);
 
   @override
   State<PlantAdded> createState() => _PlantAddedState();
@@ -34,7 +40,18 @@ class _PlantAddedState extends State<PlantAdded> {
               ),
               Center(
                 child: Text(
-                  "Plant_name added for smart care",
+                  widget.recordName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    color: Color.fromRGBO(98, 98, 98, 1),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Center(
+                child: Text(
+                  " added for smart care",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 24,
@@ -49,8 +66,13 @@ class _PlantAddedState extends State<PlantAdded> {
                   padding: const EdgeInsets.fromLTRB(43, 80, 43, 0),
                   child: ElevatedButton(
                     onPressed: () {
+                      // String plant = widget.recordName;
+                      // addPlant(pname: 'plant');
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MyHomePage()));
+                          builder: (context) => myPlant(
+                                widget.recordName,
+                                text: '',
+                              )));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromRGBO(144, 139, 139, .3),
@@ -77,3 +99,55 @@ class _PlantAddedState extends State<PlantAdded> {
     );
   }
 }
+
+// bool flag = true;
+// Future<bool> addPlantselected(
+//   String id,
+// ) async {
+//   print(id);
+
+//   try {
+//     final http.Response response = await http.post(
+//       Uri.parse('http://192.168.18.5:5000/api/signin'),
+//       headers: <String, String>{
+//         'Content-Type': 'application/json; charset=UTF-8',
+//       },
+//       body: jsonEncode(<String, String>{
+//         'plant': id,
+//       }),
+//     );
+
+//     print(response.statusCode);
+//     print(response.body);
+
+//     if (response.statusCode == 200) {
+//       flag = true;
+//       print("if");
+//       print(flag);
+//     } else {
+//       flag = false;
+//       print("else");
+//       print(flag);
+//       throw Exception;
+//     }
+//   } catch (e) {
+//     flag = false;
+//     print(flag);
+
+//     throw Exception;
+//   }
+
+//   return flag;
+// }
+
+// class eaddPlant {
+//   final String pname;
+
+//   addPlant({required this.pname});
+
+//   factory addPlant.fromJson(Map<String, dynamic> json) {
+//     return addPlant(
+//       plant: json['id'],
+//     );
+//   }
+// }

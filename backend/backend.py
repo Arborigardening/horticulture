@@ -1,4 +1,4 @@
-#import requests
+# import requests
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from datetime import datetime
@@ -46,11 +46,10 @@ def signin():
                        "','" + email + "','" + password + "')")
         mysql.connection.commit()
         # no existing username, all ok
-        return jsonify({"answer": "signed up successfully"})
+        return jsonify({"answer": "signed up successfully"},200)
     else:
         # username already existing
-        return jsonify({"answer": "password already existing"})
-
+        return ('',204)
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -73,19 +72,20 @@ def plantdetails():
     data = request.get_json()
     plantspecified = data['plant']
     cursor = mysql.connection.cursor()
-    cursor.execute("select * from plant where plant='" + plantspecified + "'")
-    t = cursor.fetchall()
-    # print(t)
-    cols = ["plant", "planting_season", "chemicals", "fertilizers", "rainfall", "sunshine", "temperature",
-            "description", "soil_depth", "f0", "f1", "f2", "w0", "w1", "w2", "harvesting_time", "expected_time"]
+    cursor.execute("select * from plant where plant='" + plantspecified +"'")
+    # cursor.execute("select * from plant")
+    t=cursor.fetchall()
+    #print(t)
+    cols=["plant","planting_season","chemicals","fertilizers","rainfall","sunshine","temperature","description","soil_depth","f0","f1","f2","w0","w1","w2","harvesting_time","expected_time"]
+    # cols=["plant","planting_season",]
     d = dict()
     for i in zip(cols, list(t[0])):
         d[i[0]] = i[1]
 
-    cursor.execute("select url from pic where plant='" + plantspecified + "'")
-    t = cursor.fetchall()
-    d['pic'] = t[0][0]
-
+    # cursor.execute("select url from pic where plant='" + plantspecified +"'")
+    # t=cursor.fetchall()
+    # d['pic']=t[0][0]
+    
     return jsonify(d)
 
 

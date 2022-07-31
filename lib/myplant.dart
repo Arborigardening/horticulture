@@ -1,21 +1,20 @@
-import 'package:arbori/Home.dart';
-import 'package:arbori/indoor_outdoorapi.dart';
+// import 'package:arbori/indoor_outdoorapi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:arbori/plant_added.dart';
-import 'package:arbori/plant_details.dart';
 
-class inorout extends StatefulWidget {
+import 'package:arbori/Home.dart';
+
+class myPlant extends StatefulWidget {
   final String recordName;
-  const inorout(this.recordName, {required String text});
-  // const inorout(String recordName, {Key? key}) : super(key: key);
+  const myPlant(this.recordName, {required String text});
+  // const myPlant({Key? key}) : super(key: key);
 
   @override
-  State<inorout> createState() => _inoroutState();
+  State<myPlant> createState() => _myPlantState();
 }
 
-class _inoroutState extends State<inorout> {
+class _myPlantState extends State<myPlant> {
   int _value = 1;
   @override
   Widget build(BuildContext context) {
@@ -54,11 +53,11 @@ class _inoroutState extends State<inorout> {
               ),
               Center(
                 child: Text(
-                  "Indoor or Outdoor",
+                  "My Plant",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 37,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                     color: Color.fromRGBO(98, 98, 98, 1),
                   ),
                 ),
@@ -80,25 +79,10 @@ class _inoroutState extends State<inorout> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 1,
-                          activeColor: Color.fromARGB(255, 255, 255, 255),
-                          overlayColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 148, 198, 239)),
-                          onChanged: (int? value) {
-                            activeColor:
-                            Color.fromRGBO(75, 227, 168, 1);
-                            // setState(() {
-                            //   _value = value;
-                            // });
-                          },
-                        ),
                         Container(
                           height: 100,
                           width: 100,
                           margin: EdgeInsets.only(right: 15),
-                          child: Image.asset("assets/images/indoor.jpg"),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -108,14 +92,14 @@ class _inoroutState extends State<inorout> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Indoor",
+                                  widget.recordName,
                                   style: TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 19,
                                       fontWeight: FontWeight.bold,
                                       color: Color.fromRGBO(98, 98, 98, 1)),
                                 ),
                                 Text(
-                                  "(balcony..)",
+                                  "......",
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.normal,
@@ -149,24 +133,23 @@ class _inoroutState extends State<inorout> {
                         height: 100,
                         width: 100,
                         margin: EdgeInsets.only(right: 15),
-                        child: Image.asset("assets/images/outdoor.jpg"),
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 30),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Outdoor",
+                                "Plant name",
                                 style: TextStyle(
-                                    fontSize: 24,
+                                    fontSize: 19,
                                     fontWeight: FontWeight.bold,
                                     color: Color.fromRGBO(98, 98, 98, 1)),
                               ),
                               Text(
-                                "(garden..)",
+                                ".....",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.normal,
@@ -176,79 +159,6 @@ class _inoroutState extends State<inorout> {
                       )
                     ]),
                   )
-                ],
-              ),
-              SizedBox(
-                width: 270,
-                child: TextField(
-                  cursorColor: Colors.white,
-                  style: TextStyle(
-                    height: 2,
-                    fontSize: 20,
-                  ),
-                  decoration: InputDecoration(
-                    labelText: "Location",
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 179, 176, 176),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 270,
-                child: TextField(
-                  cursorColor: Colors.white,
-                  style: TextStyle(
-                    height: 2,
-                    fontSize: 20,
-                  ),
-                  decoration: InputDecoration(
-                    labelText: "Planted Date",
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 179, 176, 176),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 70),
-              Column(
-                children: [
-                  Center(
-                      child: SizedBox(
-                    height: 63,
-                    width: 170,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        String pname = widget.recordName;
-                        addPlantselected(pname).then((value) => {
-                              // print(widget.recordName);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => PlantAdded(
-                                        widget.recordName,
-                                        text: '',
-                                      )))
-                            });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(75, 240, 171, 0.89),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(35.0),
-                        ),
-                        padding: EdgeInsets.all(10),
-                        // color: Colors.white,
-                      ),
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 26,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  )),
-                  // SizedBox(height: 35),
                 ],
               ),
             ],
