@@ -1,4 +1,6 @@
 import 'package:arbori/plant_details.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/plantdetailapi.dart';
 
@@ -162,7 +164,7 @@ class _homeState extends State<home> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 2,
             mainAxisSpacing: 5,
-            crossAxisCount: 3,
+            crossAxisCount: 2,
           ),
           itemCount: 38,
           itemBuilder: (context, index) {
@@ -184,15 +186,63 @@ class _homeState extends State<home> {
                   ),
                 );
               },
-              child: Container(
+              child: Card(
+                child:Container(
+                padding: const EdgeInsets.fromLTRB(0, 130, 0, 0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(_items[index].image),
                   ),
                 ),
+                child: Center(
+                  child: Text(
+                    _items[index].name,
+                    style:TextStyle(
+                      fontSize: 20,
+                      color: Colors.black87,
+                      backgroundColor: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
-            ); // Item rendering
+              ),
+              /*child: Card(
+                child: Container(
+                      height: 290,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20)),
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(5),
+                      child: Stack(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              /*Expanded(
+                                child: Image.network(
+                                  'https://tech.pelmorex.com/wp-content/uploads/2020/10/flutter.png',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),*/
+                               Container(
+                                decoration: BoxDecoration(
+                                image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(_items[index].image),
+                    	          ),
+                              ),
+                              ),
+                              Text(
+                                'Title',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),]
+              ),],),)*/
+            );// Item rendering
             // return Container(
             //   padding: const EdgeInsets.all(30),
             //   decoration: BoxDecoration(
