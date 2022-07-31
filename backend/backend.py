@@ -1,4 +1,4 @@
-import requests 
+# import requests 
 from flask import Flask,request,jsonify
 from flask_mysqldb import MySQL
 from datetime import datetime
@@ -6,12 +6,12 @@ from datetime import datetime
 username = ''
 
 app = Flask(__name__)
-
+print("hi")
 app.config['MYSQL_HOST']='localhost'
 app.config['MYSQL_USER']='root'
 app.config['MYSQL_PASSWORD']=''
 app.config['MYSQL_DB']='test'
-
+print("hi")
 mysql=MySQL(app)
 
 #cursor = mysql.connection.cursor()
@@ -68,16 +68,18 @@ def plantdetails():
     plantspecified=data['plant']
     cursor = mysql.connection.cursor()
     cursor.execute("select * from plant where plant='" + plantspecified +"'")
+    # cursor.execute("select * from plant")
     t=cursor.fetchall()
     #print(t)
     cols=["plant","planting_season","chemicals","fertilizers","rainfall","sunshine","temperature","description","soil_depth","f0","f1","f2","w0","w1","w2","harvesting_time","expected_time"]
+    # cols=["plant","planting_season",]
     d = dict()
     for i in zip(cols, list(t[0])):
         d[i[0]] = i[1]
 
-    cursor.execute("select url from pic where plant='" + plantspecified +"'")
-    t=cursor.fetchall()
-    d['pic']=t[0][0]
+    # cursor.execute("select url from pic where plant='" + plantspecified +"'")
+    # t=cursor.fetchall()
+    # d['pic']=t[0][0]
     
     return jsonify(d)
 
@@ -259,6 +261,6 @@ def dailyupdate():
     
 #print("hi")
     
-app.run(host='0.0.0.0', port=5000)
+app.run(host='192.168.18.5', port=5000)
 
 
