@@ -11,7 +11,7 @@ Future<bool> login(String id, String pass) async {
 
   try {
     final response = await http.post(
-      Uri.parse('http://192.168.18.5:5000/api/login'),
+      Uri.parse('http://192.168.1.5:5000/api/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         /*"Access-Control-Allow-Origin": "*", // Required for CORS support to work

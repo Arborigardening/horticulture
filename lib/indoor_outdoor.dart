@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:arbori/plant_added.dart';
 import 'package:arbori/plant_details.dart';
+import 'package:arbori/myPlantapi.dart';
 
 class inorout extends StatefulWidget {
   final String recordName;
@@ -221,9 +222,11 @@ class _inoroutState extends State<inorout> {
                     width: 170,
                     child: ElevatedButton(
                       onPressed: () {
+                        //trackPlant(),
                         String pname = widget.recordName;
                         addPlantselected(pname).then((value) => {
                               // print(widget.recordName);
+                              
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => PlantAdded(
                                         widget.recordName,

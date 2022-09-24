@@ -34,7 +34,7 @@ class _TomatoState extends State<Tomato> {
           Container(
             decoration: new BoxDecoration(
               image: new DecorationImage(
-                image: const AssetImage("assets/images/Tomato.jpg"),
+                image: const AssetImage("assets/images/tomato 1.png"),
                 fit: BoxFit.cover,
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:arbori/myplant.dart';
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:arbori/myPlantapi.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -15,6 +16,7 @@ class PlantAdded extends StatefulWidget {
 }
 
 class _PlantAddedState extends State<PlantAdded> {
+  myplant p=myplant();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,11 +70,12 @@ class _PlantAddedState extends State<PlantAdded> {
                     onPressed: () {
                       // String plant = widget.recordName;
                       // addPlant(pname: 'plant');
-                      Navigator.of(context).push(MaterialPageRoute(
+                      /*Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => myPlant(
                                 widget.recordName,
                                 text: '',
-                              )));
+                              )));*/
+                              checkplant();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromRGBO(144, 139, 139, .3),
@@ -97,6 +100,21 @@ class _PlantAddedState extends State<PlantAdded> {
             ],
           )),
     );
+  }
+  void checkplant()
+  {
+    p.trackPlant().then((value){
+      if(value){
+         Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => myPlant(
+                                widget.recordName,
+                                text: '',
+                              ))); 
+      }
+      else{
+
+      }
+    });
   }
 }
 

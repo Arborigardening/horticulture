@@ -19,7 +19,7 @@ Future<bool> createAccount(
   print(password);
   try {
     final http.Response response = await http.post(
-      Uri.parse('http://192.168.18.5:5000/api/signin'),
+      Uri.parse('http://192.168.1.5:5000:8080/api/signin'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -33,14 +33,16 @@ Future<bool> createAccount(
     print(response.statusCode);
 
     if (response.statusCode == 200) {
-      flag = true;
+      /*flag = true;
       print("if");
-      print(flag);
+      print(flag);*/
+      return true;
     } else {
-      flag = false;
+      /*flag = false;
       print("else");
       print(flag);
-      throw Exception;
+      throw Exception;*/
+      return false;
     }
   } catch (e) {
     flag = false;

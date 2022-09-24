@@ -228,7 +228,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   builder: (context) => const home()))
                             }
                           else
-                            {print("Error")}
+                            {
+                              //print("Error");
+                              showAlertDialog(context)
+                            }
                         });
                   },
                   style: ElevatedButton.styleFrom(
@@ -252,4 +255,30 @@ class _MyHomePageState extends State<MyHomePage> {
           )),
     );
   }
+}
+showAlertDialog(BuildContext context) {
+  // Create button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Alert"),
+    content: Text("Username already existing. Use a unique username."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

@@ -1,9 +1,11 @@
 // import 'package:arbori/indoor_outdoorapi.dart';
+import 'package:arbori/myPlantapi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:arbori/Home.dart';
+import 'package:arbori/login.dart';
 
 // class myPlant extends StatefulWidget {
 //   final String recordName;
@@ -143,9 +145,13 @@ import 'package:arbori/Home.dart';
 //     )));
 //   }
 // }// import 'package:arbori/indoor_outdoorapi.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:io' show Platform;
+
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 // import 'package:arbori/Home.dart';
 
@@ -156,7 +162,93 @@ class myPlant extends StatefulWidget {
   State<myPlant> createState() => _myPlantState();
 }
 
+enum TtsState { playing, stopped, paused, continued }
+
 class _myPlantState extends State<myPlant> {
+  late FlutterTts flutterTts;
+  String? language;
+  String? engine;
+  double volume = 1.0;
+  double pitch = 1.3;
+  double rate = 0.7;
+  bool isCurrentLanguageInstalled = false;
+
+  String _newVoiceText = "Hellloooooooooo";
+  int? _inputLength;
+
+  TtsState ttsState = TtsState.stopped;
+
+  // bool get isAndroid => Platform.isAndroid;
+
+  @override
+  initState() {
+    super.initState();
+    initTts();
+  }
+
+  initTts() {
+    flutterTts = FlutterTts();
+
+    _setAwaitOptions();
+
+    // if (isAndroid) {
+    //   _getDefaultEngine();
+    //   _getDefaultVoice();
+    // }
+
+    flutterTts.setStartHandler(() {
+      setState(() {
+        print("Playing");
+        ttsState = TtsState.playing;
+      });
+    });
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        print("Complete");
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        print("Cancel");
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        print("error: $msg");
+        ttsState = TtsState.stopped;
+      });
+    });
+  }
+
+  Future _getDefaultEngine() async {
+    await flutterTts.getDefaultEngine;
+  }
+
+  Future _getDefaultVoice() async {
+    await flutterTts.getDefaultVoice;
+  }
+
+  Future _speak({required text}) async {
+    await flutterTts.setVolume(volume);
+    await flutterTts.setSpeechRate(rate);
+    await flutterTts.setPitch(pitch);
+
+    // if (text != null) {
+    //   if (text!.isNotEmpty) {
+        await flutterTts.speak(text);
+    //   }
+    // }
+  }
+
+  Future _setAwaitOptions() async {
+    await flutterTts.awaitSpeakCompletion(true);
+  }
+
   bool viewVisible = true;
   void showWidget() {
     setState(() {
@@ -168,6 +260,12 @@ class _myPlantState extends State<myPlant> {
     setState(() {
       viewVisible = false;
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    flutterTts.stop();
   }
 
   @override
@@ -192,8 +290,9 @@ class _myPlantState extends State<myPlant> {
                 icon: Image.asset('assets/images/back.png'),
                 iconSize: 50,
                 onPressed: () {
-                  // Navigator.of(context)
-                  //     .push(MaterialPageRoute(builder: (context) => const home()));
+                  print(user);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const home()));
                 },
               ),
             ),
@@ -235,13 +334,13 @@ class _myPlantState extends State<myPlant> {
                                         width: 100,
                                         margin: EdgeInsets.only(right: 15),
                                         child: Image.asset(
-                                            "assets/images/tomato 1.png",
+                                            "assets/images/cauliflower.jpg",
                                             fit: BoxFit.cover),
                                       ),
                                       SizedBox(
                                         width: 40,
                                       ),
-                                      Text("1. ",
+                                      Text("4.",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 24,
@@ -303,12 +402,12 @@ class _myPlantState extends State<myPlant> {
                                         width: 100,
                                         margin: EdgeInsets.only(right: 15),
                                         child: Image.asset(
-                                            "assets/images/tomato 1.png"),
+                                            "assets/images/Tomato.jpg"),
                                       ),
                                       SizedBox(
                                         width: 30,
                                       ),
-                                      Text("2. ",
+                                      Text("0. ",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 24,
@@ -341,8 +440,37 @@ class _myPlantState extends State<myPlant> {
                               ))
                         ],
                       ),
-                    )
+                    ),
                   ]),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () {
+                  String text =
+      "annmaria there might be rain today you dont need to water the plant tomato with id 0.\nannmaria there might be rain today you dont need to water the plant cauliflower with id 4.\nannmaria give the fertilizer : compost, to the tomato with id 0";
+  
+                  showAlertDialog(context,text);
+                  _speak(text: text);
+                  // _checkLogin(); // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => const home()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(35.0),
+                  ),
+                  padding: EdgeInsets.all(20),
+                  // color: Colors.white,
+                ),
+                child: Text(
+                  "test",
+                  style: TextStyle(
+                      color: Color.fromRGBO(72, 67, 67, 1),
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -351,4 +479,33 @@ class _myPlantState extends State<myPlant> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context,String text) {
+  var text =
+      "annmaria there might be rain today you dont need to water the plant tomato with id 0.\nannmaria there might be rain today you dont need to water the plant cauliflower with id 4.\nannmaria give the fertilizer : compost, to the tomato with id 0";
+  // Create button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text(""),
+    content: Text(text),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

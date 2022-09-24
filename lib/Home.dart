@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/plantdetailapi.dart';
-
+String img="";
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
 
@@ -150,19 +150,19 @@ class _homeState extends State<home> {
         backgroundColor: Color.fromRGBO(251, 253, 255, 1),
         shadowColor: Colors.white,
         actions: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(
-                Icons.menu,
-                color: Color.fromARGB(255, 33, 243, 194),
-                size: 30,
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topLeft,
+          //   child: GestureDetector(
+          //     onTap: () {},
+          //     child: Icon(
+          //       Icons.menu,
+          //       color: Color.fromARGB(255, 33, 243, 194),
+          //       size: 30,
+          //     ),
+          //   ),
+          // ),
           Padding(
-            padding: const EdgeInsets.only(right: 10.0),
+            padding: const EdgeInsets.only(right: 6.0),
             child: IconButton(
               onPressed: () {
                 showSearch(context: context, delegate: CustomSearch());
@@ -207,6 +207,7 @@ class _homeState extends State<home> {
                 String name = _items[index].name;
                 // s.selected(name);
                 // print(_items[index].image);
+                img=_items[index].image;
                 print(_items[index].name);
                 Navigator.push(
                   context,

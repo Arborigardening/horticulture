@@ -4,7 +4,7 @@ import 'package:arbori/Home.dart';
 import 'package:arbori/loginapi.dart';
 import 'package:arbori/myPlantapi.dart';
 //import 'package:flutter/src/widgets/framework.dart';
-
+String user="";
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -70,6 +70,7 @@ class _LoginState extends State<Login> {
                   controller: userController,
                   onChanged: (String value) {
                     print(value);
+                    user=userController.text;
                   },
                   keyboardType: TextInputType.multiline,
                   // obscureText: true,
@@ -176,7 +177,7 @@ class _LoginState extends State<Login> {
       login(id, pass).then((value) {
         if (value) {
           print('Authenticated');
-          p.trackPlant(id);
+          //p.trackPlant(id);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => home()));
         } else {

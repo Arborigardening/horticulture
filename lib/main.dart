@@ -1,5 +1,7 @@
+import 'package:arbori/fluttertts.dart';
 import 'package:arbori/splashscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
 void main(List<String> args) => runApp(MyApp());
@@ -12,7 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Digitalized Horticulture App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: SplashScreen(),
+      // home: MyApp_tts(),
+      home: SplashScreen()
     );
   }
 }
