@@ -89,16 +89,23 @@ def plantdetails():
     return jsonify(d)
 
 
-@app.route('/api/trackmyplants', methods=['POST'])
+@app.route('/api/trackmyplants',methods=['POST'])
 def trackmyplants():
     cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select selection_id,selected_plant from selections where username='" + username + "'")
-    t = cursor.fetchall()
-    cols = ["selection_id", "selected_plant"]
+    cursor.execute("select selection_id,selected_plant from selections where username='" + username +"'")
+    t=cursor.fetchall()
+    print(t)
+    cols=["selection_id","selected_plant"]
+    selection_id = []
+    selected_plant = []
     d = dict()
-    for i in zip(cols, list(t[0])):
-        d[i[0]] = i[1]
+    for i in range(len(t)):
+        selection_id.append(t[i][0])
+        selected_plant.append(t[i][1])
+    
+    d['selection_id'] = selection_id
+    d['selected_plant'] = selected_plant
+    print(d)
 
     return jsonify(d)
 
