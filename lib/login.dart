@@ -1,10 +1,12 @@
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/Home.dart';
-import 'package:arbori/loginapi.dart';
-import 'package:arbori/myPlantapi.dart';
+import 'package:arbori/api/loginapi.dart';
+import 'package:arbori/api/myPlantapi.dart';
+
 //import 'package:flutter/src/widgets/framework.dart';
-String user="";
+String user = "";
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -13,7 +15,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  myplant p = myplant();
   bool userCheck = true;
   bool passCheck = true;
   final userController = TextEditingController();
@@ -70,7 +71,7 @@ class _LoginState extends State<Login> {
                   controller: userController,
                   onChanged: (String value) {
                     print(value);
-                    user=userController.text;
+                    user = userController.text;
                   },
                   keyboardType: TextInputType.multiline,
                   // obscureText: true,

@@ -54,6 +54,7 @@ def signin():
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
+    print(data)
     global username
     username = data['username']
     password = data['password']
@@ -322,4 +323,4 @@ def dailyupdate():
 
 
 # print("hi")
-app.run(host='192.168.1.5', port=5000)
+app.run()

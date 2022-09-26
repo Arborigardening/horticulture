@@ -3,7 +3,7 @@ import 'package:arbori/Home.dart';
 import 'package:arbori/plant_details.dart';
 import 'package:arbori/login.dart';
 import 'package:flutter/material.dart';
-import 'package:arbori/signupapi.dart';
+import 'package:arbori/api/signupapi.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -256,6 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 showAlertDialog(BuildContext context) {
   // Create button
   Widget okButton = FlatButton(

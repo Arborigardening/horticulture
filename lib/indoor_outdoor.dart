@@ -1,11 +1,11 @@
 import 'package:arbori/Home.dart';
-import 'package:arbori/indoor_outdoorapi.dart';
+import 'package:arbori/api/indoor_outdoorapi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:arbori/plant_added.dart';
 import 'package:arbori/plant_details.dart';
-import 'package:arbori/myPlantapi.dart';
+import 'package:arbori/api/myPlantapi.dart';
 
 class inorout extends StatefulWidget {
   final String recordName;

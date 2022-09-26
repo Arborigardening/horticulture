@@ -12,9 +12,10 @@ class myplant {
   Future<dynamic> trackPlant() async {
     print("track username");
     //print(id);
+    print(user);
     try {
       final http.Response response = await http.post(
-        Uri.parse('http://192.168.1.5:5000/api/trackmyplants'),
+        Uri.parse('http://192.168.1.2:5000/api/dailyupdate'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

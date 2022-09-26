@@ -3,7 +3,7 @@ import 'package:arbori/Home.dart';
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/indoor_outdoor.dart';
-import 'package:arbori/plantdetailapi.dart';
+import 'package:arbori/api/plantdetailapi.dart';
 
 class PlantDetails extends StatefulWidget {
   final String recordName;
@@ -41,8 +41,8 @@ class _PlantDetailsState extends State<PlantDetails> {
                 icon: Image.asset('assets/images/back.png'),
                 iconSize: 50,
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const home()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const home()));
                 },
               ),
             ),

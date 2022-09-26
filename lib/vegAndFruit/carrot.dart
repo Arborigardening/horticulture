@@ -3,20 +3,20 @@ import 'package:arbori/Home.dart';
 import 'package:arbori/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:arbori/indoor_outdoor.dart';
-import 'package:arbori/plantdetailapi.dart';
+import 'package:arbori/api/plantdetailapi.dart';
 
-class Tomato extends StatefulWidget {
+class Carrot extends StatefulWidget {
   final String recordName;
-  const Tomato(this.recordName, {required String text});
+  const Carrot(this.recordName, {required String text});
 
   // const PlantDetails({Key? key, required this.text}) : super(key: key)
 
   // @override
   @override
-  State<Tomato> createState() => _TomatoState();
+  State<Carrot> createState() => _CarrotState();
 }
 
-class _TomatoState extends State<Tomato> {
+class _CarrotState extends State<Carrot> {
   // Details detailsService = Details();
   plantdetail p = plantdetail();
   // selectedPlant s = selectedPlant();
@@ -98,7 +98,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Planting Season: June- July",
+                          "Planting Season: october-november",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -111,7 +111,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Chemicals: nitrogen,phosphorous,potassium,calcium",
+                          "Chemicals: moderate level of nitrogen,low level  of phosphorous,potassium",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -124,7 +124,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Fertilizer: NPK:5-10-5",
+                          "Fertilizer: NPK:5-10-10",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -137,7 +137,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Rainfall: low-medium",
+                          "Rainfall: low",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -150,7 +150,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Sunshine: bright",
+                          "Sunshine:6-10 hrs/day sun",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -163,7 +163,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: const Text(
-                          "Temperature: 32cel-33cel",
+                          "Temperature: 16-20",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -173,7 +173,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Description: Seeds are sown at a depth of 2-3 cm and covered with a fine layer of soil followed by light watering by water can. The beds should then be covered with dry straw or grass or sugarcane leaves to maintain required temperature and moisture. The watering should be done by water can as per the need till germination is completed. The cover of dry straw or grass is removed immediately after germination is complete",
+                          "Description: The carrot (Daucus carota subsp. sativus) is a root vegetable, typically orange in color, though purple, black, red, white, and yellow cultivars exist, all of which are domesticated forms of the wild carrot, Daucus carota, native to Europe and Southwestern Asia.",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -186,7 +186,7 @@ class _TomatoState extends State<Tomato> {
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Harvesting time: 120-130",
+                          "Harvesting time: 60-80",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,

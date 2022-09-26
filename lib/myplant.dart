@@ -1,159 +1,18 @@
 // import 'package:arbori/indoor_outdoorapi.dart';
-import 'package:arbori/myPlantapi.dart';
+import 'package:arbori/api/myPlantapi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:arbori/Home.dart';
 import 'package:arbori/login.dart';
 
-// class myPlant extends StatefulWidget {
-//   final String recordName;
-//   const myPlant(this.recordName, {required String text});
-//   @override
-//   State<myPlant> createState() => _myPlantState();
-// }
-
-// class _myPlantState extends State<myPlant> {
-//   bool viewVisible = true;
-//   void showWidget() {
-//     setState(() {
-//       viewVisible = true;
-//     });
-//   }
-
-//   void hideWidget() {
-//     setState(() {
-//       viewVisible = false;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         home: Scaffold(
-//             body: Column(
-//       children: [
-//         Align(
-//           alignment: Alignment.topLeft,
-//           child: IconButton(
-//             icon: Image.asset('assets/images/back.png'),
-//             iconSize: 50,
-//             onPressed: () {
-//               Navigator.of(context)
-//                   .push(MaterialPageRoute(builder: (context) => const home()));
-//             },
-//           ),
-//         ),
-//         SizedBox(
-//           height: 2,
-//         ),
-//         Center(
-//           child: Text(
-//             "My Plant",
-//             textAlign: TextAlign.center,
-//             style: TextStyle(
-//               fontSize: 37,
-//               fontWeight: FontWeight.w600,
-//               color: Color.fromRGBO(98, 98, 98, 1),
-//             ),
-//           ),
-//         ),
-//         Container(
-//           padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-//           height: 220,
-//           width: double.maxFinite,
-//           child: Card(
-//             elevation: 5,
-//             child: Padding(
-//               padding: EdgeInsets.all(7),
-//               child: Stack(children: <Widget>[
-//                 Align(
-//                   alignment: Alignment.centerRight,
-//                   child: Stack(
-//                     children: <Widget>[
-//                       Padding(
-//                           padding: const EdgeInsets.only(left: 10, top: 5),
-//                           child: Column(
-//                             children: <Widget>[
-//                               Row(
-//                                 children: <Widget>[
-//                                   Container(
-//                                       padding: const EdgeInsets.fromLTRB(
-//                                           0, 130, 0, 0),
-//                                       decoration: BoxDecoration(
-//                                           image: DecorationImage(
-//                                         fit: BoxFit.cover,
-//                                         image: NetworkImage(
-//                                           'https://www.wur.nl/upload_mm/d/c/b/0f99b95f-970d-4664-8af1-b62f56601ec2_moringa-seed-pods_4190bbd1_750x400.jpg',
-//                                         ),
-//                                       ))),
-//                                   SizedBox(
-//                                     height: 10,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                 ],
-//                               ),
-//                             ],
-//                           ))
-//                     ],
-//                   ),
-//                 )
-//               ]),
-//             ),
-//           ),
-//         ),
-//         Container(
-//           padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-//           height: 220,
-//           width: double.maxFinite,
-//           child: Card(
-//             elevation: 5,
-//             child: Padding(
-//               padding: EdgeInsets.all(7),
-//               child: Stack(children: <Widget>[
-//                 Align(
-//                   alignment: Alignment.centerRight,
-//                   child: Stack(
-//                     children: <Widget>[
-//                       Padding(
-//                           padding: const EdgeInsets.only(left: 10, top: 5),
-//                           child: Column(
-//                             children: <Widget>[
-//                               Row(
-//                                 children: <Widget>[
-//                                   SizedBox(
-//                                     height: 10,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                 ],
-//                               ),
-//                             ],
-//                           ))
-//                     ],
-//                   ),
-//                 )
-//               ]),
-//             ),
-//           ),
-//         ),
-//       ],
-//     )));
-//   }
-// }// import 'package:arbori/indoor_outdoorapi.dart';
 import 'dart:async';
 import 'dart:io' show Platform;
 
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
+import 'api/photos.dart';
+
 // import 'package:arbori/Home.dart';
+var t = data.toString();
 
 class myPlant extends StatefulWidget {
   final String recordName;
@@ -240,7 +99,7 @@ class _myPlantState extends State<myPlant> {
 
     // if (text != null) {
     //   if (text!.isNotEmpty) {
-        await flutterTts.speak(text);
+    await flutterTts.speak(text);
     //   }
     // }
   }
@@ -268,8 +127,83 @@ class _myPlantState extends State<myPlant> {
     flutterTts.stop();
   }
 
+  Container containerWrapper(
+      {required String imgLink, required String id, required String name}) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
+      height: 200,
+      width: double.maxFinite,
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.all(7),
+          child: Stack(children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, top: 20),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Container(
+                              height: 100,
+                              width: 100,
+                              margin: EdgeInsets.only(right: 15),
+                              child: Image.network("$imgLink"),
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            Text("$id. ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(98, 98, 98, 1))),
+                            Text("$name",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(98, 98, 98, 1))),
+                            SizedBox(height: 10, width: 30),
+                            Padding(
+                                padding: EdgeInsets.only(right: 10.0),
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.delete,
+                                    size: 30,
+                                  ),
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(myPlantApi.plants);
+    print(myPlantApi.plants["selected_plant"].length);
+    print(
+        Photos.images[Photos.imgmap[myPlantApi.plants["selected_plant"][0]]!]);
+    print(Photos.imgmap[myPlantApi.plants["selected_plant"][0]]);
+    print(t);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(0),
@@ -310,152 +244,69 @@ class _myPlantState extends State<myPlant> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-              height: 200,
-              width: double.maxFinite,
-              child: Card(
-                elevation: 5,
-                child: Padding(
-                  padding: EdgeInsets.all(7),
-                  child: Stack(children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Stack(
-                        children: <Widget>[
-                          Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 20),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 100,
-                                        width: 100,
-                                        margin: EdgeInsets.only(right: 15),
-                                        child: Image.asset(
-                                            "assets/images/cauliflower.jpg",
-                                            fit: BoxFit.cover),
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      Text("4.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color.fromRGBO(
-                                                  98, 98, 98, 1))),
-                                      Text("Cauliflower",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color.fromRGBO(
-                                                  98, 98, 98, 1))),
-                                      SizedBox(height: 10, width: 10),
-                                      Padding(
-                                          padding: EdgeInsets.only(right: 10.0),
-                                          child: GestureDetector(
-                                            onTap: () {},
-                                            child: Icon(
-                                              Icons.delete,
-                                              size: 30,
-                                            ),
-                                          )),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ))
-                        ],
-                      ),
-                    )
-                  ]),
-                ),
-              ),
+            // Column(mainAxisSize: MainAxisSize.min, children: [
+
+            // containerWrapper(
+            //   imgLink:
+            //       '${Photos.images[Photos.imgmap[int.parse(myPlantApi.plants["selected_plant"][0])]!].image}',
+            //   id: '${myPlantApi.plants["selection_id"][0]}',
+            //   name:
+            //       '${Photos.images[int.parse(myPlantApi.plants["selected_plant"][0])].name}',
+            // ),
+
+            // for (int i = 0; i < myPlantApi.plants["selected_plant"].length; i++)
+            //   containerWrapper(
+            //     imgLink: Photos
+            //         .images[
+            //             Photos.imgmap[myPlantApi.plants["selected_plant"][i]]!]
+            //         .image,
+            //     id: myPlantApi.plants["selection_id"][i].toString(),
+            //     name:
+            //         Photos.images[myPlantApi.plants["selected_plant"][i]].name,
+            //   ),
+
+            // }
+            // ]),
+            containerWrapper(
+              imgLink: Photos.images[0].image,
+              id: '0',
+              name: Photos.images[0].name,
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
-              height: 200,
-              width: double.maxFinite,
-              child: Card(
-                elevation: 5,
-                child: Padding(
-                  padding: EdgeInsets.all(7),
-                  child: Stack(children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Stack(
-                        children: <Widget>[
-                          Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 20),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 100,
-                                        width: 100,
-                                        margin: EdgeInsets.only(right: 15),
-                                        child: Image.asset(
-                                            "assets/images/Tomato.jpg"),
-                                      ),
-                                      SizedBox(
-                                        width: 30,
-                                      ),
-                                      Text("0. ",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color.fromRGBO(
-                                                  98, 98, 98, 1))),
-                                      Text("Tomato",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color.fromRGBO(
-                                                  98, 98, 98, 1))),
-                                      SizedBox(height: 10, width: 30),
-                                      Padding(
-                                          padding: EdgeInsets.only(right: 10.0),
-                                          child: GestureDetector(
-                                            onTap: () {},
-                                            child: Icon(
-                                              Icons.delete,
-                                              size: 30,
-                                            ),
-                                          )),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ))
-                        ],
-                      ),
-                    ),
-                  ]),
-                ),
-              ),
+            containerWrapper(
+              imgLink: '${Photos.images[4].image}',
+              id: '9',
+              name: '${Photos.images[4].name}',
             ),
+            // containerWrapper(
+            //   imgLink: Photos.images[2].image,
+            //   id: '2',
+            //   name: Photos.images[2].name,
+            // ),
+            // containerWrapper(
+            //   imgLink: Photos.images[3].image,
+            //   id: '3',
+            //   name: Photos.images[3].name,
+            // ),
+            // containerWrapper(
+            //   imgLink: Photos.images[4].image,
+            //   id: '4',
+            //   name: Photos.images[4].name,
+            // ),
             Align(
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () {
                   String text =
-      "annmaria there might be rain today you dont need to water the plant tomato with id 0.\nannmaria there might be rain today you dont need to water the plant cauliflower with id 4.\nannmaria give the fertilizer : compost, to the tomato with id 0";
-  
-                  showAlertDialog(context,text);
+                      "$user there water the plant ${myPlantApi.plants["selected_plant"][0]} ${myPlantApi.plants["selection_id"][0]} . \n" +
+                          user +
+                          " give the fertilizer : compost, to the cabbage 9.";
+                  /*user +
+                      " there might be rain today you dont need to water the plant cauliflower with id 4.\n" +
+                      user +
+                      " give the fertilizer : compost, to the tomato with id 0"*/
+
+                  showAlertDialog(context, text);
                   _speak(text: text);
-                  // _checkLogin(); // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (context) => const home()));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
@@ -481,9 +332,15 @@ class _myPlantState extends State<myPlant> {
   }
 }
 
-showAlertDialog(BuildContext context,String text) {
+showAlertDialog(BuildContext context, String text) {
   var text =
-      "annmaria there might be rain today you dont need to water the plant tomato with id 0.\nannmaria there might be rain today you dont need to water the plant cauliflower with id 4.\nannmaria give the fertilizer : compost, to the tomato with id 0";
+      "$user there water the plant ${myPlantApi.plants["selected_plant"][0]} ${myPlantApi.plants["selection_id"][0]} . \n" +
+          user +
+          " give the fertilizer : compost, to the cabbage 9.";
+  /*user +
+      " there might be rain today you dont need to water the plant cauliflower with id 4.\n" +
+      user +
+      " give the fertilizer : compost, to the tomato with id 0"*/
   // Create button
   Widget okButton = FlatButton(
     child: Text("OK"),
